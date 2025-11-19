@@ -20,7 +20,106 @@ When the user selects any part of the text:
 ## **3. Bubble Menu Features**
 ### **3.1 Highlight and Coding**
 - Option to highlight selected text using different colors.
-- Ability to apply one or more “codes” to the selection.
+# qda-editor
+
+Client-side React + Next.js editor for qualitative data analysis with text highlighting, coding, and excerpt management.
+
+## Features
+
+- ✨ **Rich Text Editor** — powered by Tiptap/ProseMirror
+- 🎨 **Text Highlighting** — multiple colors for marking important sections
+- 🏷️ **Codes & Tags** — create and apply codes to excerpts
+- 📝 **Excerpt Management** — automatically track highlighted sections with metadata
+- 💾 **Autosave** — saves to backend every 5 seconds + on blur
+- 🔄 **Undo/Redo** — built-in editor history (100-level depth)
+- 📱 **Responsive** — clean sidebar layout with excerpt list
+
+## Tech Stack
+
+- **React 19** + **Next.js 15** (latest versions)
+- **TypeScript** (strict mode)
+- **Tiptap** (rich text editor)
+- **Axios** (API client)
+- **CSS Modules** (styling, no SSR)
+
+## Setup
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+## Development
+
+Start the dev server:
+
+```bash
+npm run dev
+```
+
+Open http://localhost:3000 in your browser.
+
+### Environment Variables
+
+Create a `.env.local` file (optional, defaults to `http://localhost:3000/api`):
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+```
+
+## Build & Deploy
+
+Build for production:
+
+```bash
+npm run build
+npm start
+```
+
+## Architecture Notes
+
+- **Client-side only** — no server-side rendering (SSR disabled in `next.config.ts`)
+- **API-driven** — all data persisted to backend via `lib/api.ts`
+- **Component structure**:
+  - `app/page.tsx` — entry point
+  - `components/EditorPage.tsx` — main editor + state management
+  - `components/BubbleMenu.tsx` — context menu for highlighting/coding
+  - `components/CodePanel.tsx` — modal for code management
+- **State management** — React hooks (no Redux/Zustand needed for MVP)
+- **Autosave** — 5-second interval + blur trigger
+
+## API Integration
+
+The editor expects these backend endpoints:
+
+### GET `/codes`
+Fetch all available codes
+**Response**: `Code[]`
+
+### POST `/codes`
+Save/update codes
+**Body**: `{ codes: Code[] }`
+
+### GET `/documents/:id`
+Fetch document with content and metadata
+**Response**: `Document`
+
+### POST `/documents/:id`
+Save document with content, codes, excerpts
+**Body**: `Document`
+
+See `lib/api.ts` for implementation.
+
+## Future Enhancements
+
+- [ ] Database integration (PostgreSQL/MongoDB)
+- [ ] User authentication
+- [ ] Collaborative editing (WebSockets)
+- [ ] Export to PDF/CSV
+- [ ] Advanced search/filtering
+- [ ] Revision history UI
+
 - Ability to tag an excerpt (text segment) and save it.
 
 ### **3.2 Codes**
