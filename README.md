@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Qualitative Data Analysis Tool
 
-## Getting Started
+A modern web-based application for qualitative researchers to perform thematic analysis on interview transcripts.
 
-First, run the development server:
+## 🎯 Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This tool helps researchers:
+- Organize interview participants and questions
+- Code and highlight text excerpts from transcripts
+- Build themes from codes
+- Analyze patterns across participants
+
+## 🏗️ Architecture
+
+- **Frontend**: Next.js 15 (App Router), React, TypeScript, TailwindCSS
+- **UI Components**: shadcn/ui
+- **Editor**: TipTap (ProseMirror-based)
+- **State Management**: Zustand
+- **Backend**: AWS API Gateway + Lambda + DynamoDB
+- **Hosting**: AWS S3 (static site)
+- **Theme**: Light/Dark mode support
+
+## 📁 Project Structure
+```
+├── app/                      # Next.js app router
+│   ├── layout.tsx           # Root layout with theme provider
+│   └── project/[id]/        # Main app route
+├── components/
+│   ├── layout/              # App layout components
+│   ├── navigation/          # Left panel navigation
+│   ├── editor/              # TipTap editor components
+│   ├── codes/               # Code management UI
+│   ├── ui/                  # shadcn/ui components
+│   ├── theme-provider.tsx   # Theme context
+│   └── theme-toggle.tsx     # Dark/light mode toggle
+├── lib/
+│   ├── stores/              # Zustand state management
+│   ├── hooks/               # Custom React hooks
+│   └── utils.ts             # Utility functions
+├── types/
+│   └── index.ts             # TypeScript type definitions
+└── docs/                    # Documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Prerequisites
+- Node.js 18+
+- npm or yarn
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Installation
+```bash
+# Clone the repository
+git clone <repo-url>
+cd qda-editor
 
-## Learn More
+# Install dependencies
+npm install
 
-To learn more about Next.js, take a look at the following resources:
+# Run development server
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Visit `http://localhost:3000/project/test-123`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📖 Documentation
 
-## Deploy on Vercel
+- [Features Overview](./docs/FEATURES.md)
+- [User Workflows](./docs/WORKFLOWS.md)
+- [Technical Architecture](./docs/ARCHITECTURE.md)
+- [Component Guide](./docs/COMPONENTS.md)
+- [State Management](./docs/STATE.md)
+- [Backend API](./docs/API.md)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🎨 Key Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Responsive Layout
+- **Desktop**: 3-panel resizable layout (Navigation | Editor | Codes)
+- **Mobile**: Single panel with slide-out navigation and codes
+
+### Dual Navigation Views
+- **By Participant**: Browse all questions for each participant
+- **By Question**: Compare responses across all participants
+
+### Rich Text Editing
+- TipTap editor with highlighting capabilities
+- Multi-color highlighting for different codes
+- Bubble menu for quick coding
+
+### Code Management
+- Create, edit, and organize codes
+- Color-coded visual system
+- Support for 100s-1000s of codes
+- Hierarchical categorization
+
+### Auto-save
+- All changes automatically saved
+- Debounced to prevent excessive API calls
+- Visual feedback for save status
+
+## 🔄 Development Status
+
+- [x] Project setup
+- [x] Responsive layout
+- [x] Theme switching
+- [ ] TypeScript types & mock data
+- [ ] State management (Zustand)
+- [ ] Left panel navigation
+- [ ] TipTap editor integration
+- [ ] Text highlighting functionality
+- [ ] Code management UI
+- [ ] Cross-participant view
+- [ ] Backend integration
+- [ ] Auto-save implementation
+
+## 📝 License
+
+[Your License]
+
+## 👥 Contributors
+
+[Your Team]
