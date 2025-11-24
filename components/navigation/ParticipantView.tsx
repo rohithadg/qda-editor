@@ -18,12 +18,13 @@ export default function ParticipantView() {
     new Set([participants[0]?.id])
   );
 
-  // Memoize coded status
+  // Memoize coded status - check if content has <mark> tags
   const codedStatus = useMemo(() => {
     const status: Record<string, boolean> = {};
     answers.forEach((answer) => {
       const key = `${answer.participantId}-${answer.questionId}`;
-      status[key] = answer.highlights.length > 0;
+      // Check if content contains <mark> tags (highlights)
+      status[key] = answer.content.includes('<mark');
     });
     return status;
   }, [answers]);

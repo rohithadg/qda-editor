@@ -19,8 +19,7 @@ export interface Answer {
   id: string;
   participantId: string;
   questionId: string;
-  text: string; // Raw text or TipTap JSON (stringified)
-  highlights: Highlight[];
+  content: string; // Changed from 'text' to 'content' - stores TipTap HTML
   lastModified: string;
 }
 
